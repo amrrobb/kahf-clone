@@ -1,4 +1,5 @@
 import kahf_register from '../assets/kahf_register.jpg'
+import {VisibilityOutlined } from '@material-ui/icons'
 
 export default function RegisterBox(params) {
     return (
@@ -13,26 +14,38 @@ export default function RegisterBox(params) {
                         <div className="font-black text-[2.5rem] uppercase font-archivo flex flex-wrap pr-20 leading-none">
                             welcome to kahf and let's join
                         </div>
-                        <div className="pt-6 px-2">
+                        <div className="pt-8 px-2">
                             <form className="text-sm">
                                 <div className="mb-5">
                                     <label className="font-semibold mb-1">Name</label>
                                     <div>
-                                        <input type="text" className="border border-gray-200 w-full py-3 px-4" placeholder="Type Your Name Here" />
+                                        <input type="text" className="focus:outline-none focus:bg-gray-100 border border-gray-200 w-full py-3 px-4" placeholder="Type Your Name Here" />
                                     </div>
                                 </div>
 
                                 <div className="mb-5">
                                     <label className="font-semibold mb-1">Email</label>
                                     <div>
-                                        <input type="text" className="border border-gray-200 w-full py-3 px-4" placeholder="Your Email Address" />
+                                        <input type="text" className="focus:outline-none focus:bg-gray-100  border border-gray-200 w-full py-3 px-4" placeholder="Your Email Address" />
                                     </div>
                                 </div>
 
-                                <div className="mb-5">
+                                {/* <div className="mb-5">
                                     <label className="font-semibold mb-1">Password</label>
                                     <div>
                                         <input type="text" className="border border-gray-200 w-full py-3 px-4" placeholder="Your Password"  />
+                                    </div>
+                                </div> */}
+
+                                <div className="mb-5">
+                                    <label className="font-semibold mb-1">Password</label>
+                                    <div className="w-full flex items-center border p-[0] m-[0]">
+                                        <input type="text" className="focus:outline-none focus:bg-gray-100 border-gray-200 w-3/4 py-3 px-4" placeholder="Your Password"  />
+                                        <div className="text-right w-1/4">
+                                            <button type="button">
+                                                <VisibilityOutlined className="mr-4"/>
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -40,7 +53,7 @@ export default function RegisterBox(params) {
                                     <p className="text-gray-400">By clicking this button, you agree to Kahf's <a className="text-[#95BB76] underline" href="/">privacy policy</a>  </p> 
                                 </div>
 
-                                <input type="submit" className="bg-black text-white font-semibold w-full py-3 px-4" value="REGISTER" />
+                                <input type="submit" className="bg-black text-white font-semibold w-full py-3 px-4 tracking-wider" value="REGISTER" />
                             </form>
                         </div>
                     </div>

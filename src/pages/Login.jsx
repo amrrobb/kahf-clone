@@ -7,7 +7,7 @@ export default function Login(params) {
                 <LoginBox />
             </div>
             <div className="">
-                {/* <RegisterBox /> */}
+                <RegisterBox />
 
             </div>
         </>

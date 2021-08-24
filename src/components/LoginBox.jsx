@@ -1,4 +1,5 @@
 import kahf_login from '../assets/kahf_login.jpg'
+import {VisibilityOutlined } from '@material-ui/icons'
 
 export default function LoginBox(params) {
     return (
@@ -18,14 +19,19 @@ export default function LoginBox(params) {
                                 <div className="mb-6">
                                     <label className="font-semibold mb-1">Email</label>
                                     <div>
-                                        <input type="text" className="border border-gray-200 w-full py-3 px-4" placeholder="Your Email Address" />
+                                        <input type="text" className="border focus:outline-none focus:bg-gray-100 border-gray-200 w-full py-3 px-4" placeholder="Your Email Address" />
                                     </div>
                                 </div>
 
                                 <div className="mb-6">
                                     <label className="font-semibold mb-1">Password</label>
-                                    <div>
-                                        <input type="text" className="border border-gray-200 w-full py-3 px-4" placeholder="Your Password"  />
+                                    <div className="w-full flex items-center border p-[0] m-[0]">
+                                        <input type="text" className="focus:outline-none focus:bg-gray-100 border-gray-200 w-3/4 py-3 px-4" placeholder="Your Password"  />
+                                        <div className="text-right w-1/4">
+                                            <button type="button">
+                                                <VisibilityOutlined className="mr-4"/>
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -34,7 +40,7 @@ export default function LoginBox(params) {
                                     <label>Remember me </label>
                                 </div>
 
-                                <input type="submit" className="bg-black text-white font-semibold text-sm w-full py-3 px-4" value="LOG IN" />
+                                <input type="submit" className="bg-black text-white font-semibold text-sm w-full py-3 px-4 tracking-wider" value="LOG IN" />
                             </form>
                         </div>
                         <div className="flex justify-center text-[13px] pt-7 mb-16">
