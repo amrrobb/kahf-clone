@@ -46,11 +46,11 @@ export const fetchCart = () => {
     }
 }
 
-export const addToCart = () => {
+export const addToCart = (input) => {
     return (dispatch, getState) => {
         (async () => {
             try {
-                const {data} = await axios.post('https://paragon-training-api.herokuapp.com/cart')
+                const {data} = await axios.post('https://paragon-training-api.herokuapp.com/cart', input)
                 console.log(data);
                 dispatch(fetchCart())
                        

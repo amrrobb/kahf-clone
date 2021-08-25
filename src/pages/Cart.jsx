@@ -1,15 +1,10 @@
 import {CartItem} from '../components'
-import {fetchCart} from '../store/actions'
-import { useDispatch, useSelector} from 'react-redux'
-import { useEffect } from 'react'
+import {useSelector} from 'react-redux'
+import { useHistory } from 'react-router-dom'
 
 export default function Cart(params) {
-    const dispatch = useDispatch()
     const cart = useSelector(state => state.cart)
-
-    useEffect(() => {
-        dispatch(fetchCart())
-    }, [cart.length])
+    const history = useHistory()
 
     return (
         <>
@@ -24,10 +19,12 @@ export default function Cart(params) {
                         ? cart.map((el) => (
                             <CartItem item={el} key={el.id} />
                         ))
-                        : null
+                        : <div className="text-lg text-gray-500 tracking-wide mb-7">
+                            You don't have any item in this cart
+                        </div>
                     }
                 </div>
-                <button type="button"> 
+                <button type="button" onClick={() => history.push('/kahf-shop')}> 
                     <div className="text-gray-400 text-xs mt-5 flex items-center">
                         <span class="material-icons" style={{"transform": "scaleX(-1)"}}>arrow_right_alt</span>
                         <p className="ml-2 font-semibold tracking-wide">Go Back Shopping</p>

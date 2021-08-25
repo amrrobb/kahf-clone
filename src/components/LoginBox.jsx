@@ -1,7 +1,14 @@
 import kahf_login from '../assets/kahf_login.jpg'
 import {VisibilityOutlined } from '@material-ui/icons'
+import { useState } from 'react'
 
-export default function LoginBox(params) {
+export default function LoginBox({setLoginPage}) {
+    const [visible, setVisible] = useState(false)    
+    const passwordVisibility = (e) => {
+        e.preventDefault()
+        return visible ? setVisible(false) : setVisible(true)
+    }
+
     return (
         <>
         <div className="mt-3">
@@ -26,9 +33,9 @@ export default function LoginBox(params) {
                                 <div className="mb-6">
                                     <label className="font-semibold mb-1">Password</label>
                                     <div className="w-full flex items-center border p-[0] m-[0]">
-                                        <input type="text" className="focus:outline-none focus:bg-gray-100 border-gray-200 w-3/4 py-3 px-4" placeholder="Your Password"  />
+                                        <input type={visible ? "text" : "password"} className="focus:outline-none focus:bg-gray-100 border-gray-200 w-3/4 py-3 px-4" placeholder="Your Password"  />
                                         <div className="text-right w-1/4">
-                                            <button type="button">
+                                            <button type="button" onClick={passwordVisibility}>
                                                 <VisibilityOutlined className="mr-4"/>
                                             </button>
                                         </div>
@@ -44,11 +51,13 @@ export default function LoginBox(params) {
                             </form>
                         </div>
                         <div className="flex justify-center text-[13px] pt-7 mb-16">
-                            <p>Forgot your password? <a className="text-[#95BB76] underline" href="/">Click here</a>  </p> 
+                            <div className="flex">
+                                Forgot your password? &nbsp;<p className="text-[#95BB76] underline hover:text-black">Click here</p>
+                            </div>
                         </div>
                     </div>
                     <div className="flex justify-center text-[13px] mt-2 py-5 bg-gray-100">
-                        <p>Don't have an account? <a className="text-[#95BB76] underline" href="/">Sign up Here</a>  </p> 
+                        <p>Don't have an account? <button className="text-[#95BB76] underline hover:text-black" onClick={() => setLoginPage(false)}>Sign up Here</button>  </p> 
                     </div>
                 </div>
             </div>

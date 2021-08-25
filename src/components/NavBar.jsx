@@ -1,4 +1,16 @@
+import { useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { NavLink } from "react-router-dom"
+import {fetchCart} from '../store/actions'
+
 export default function NavBar(params) {
+    const cart = useSelector(state => state.cart)
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(fetchCart())
+    }, [])
+
     return (
         <>
         <div className="fixed w-full m-0 top-0 bg-white z-30"> 
@@ -9,10 +21,12 @@ export default function NavBar(params) {
                 </div>
                 <div className="text-right text-white text-sm">
                     <div className="flex justify-end ">
-                        <div className="flex mx-3 items-center">
-                            <img src="https://www.kahfeveryday.com/wp-content/uploads/2021/07/group-1.png" alt="" className="w-auto h-[20px] pr-2"/>
-                            (0)
-                        </div>
+                        <NavLink exact to="/cart" >
+                            <div className="flex mx-3 items-center">
+                                <img src="https://www.kahfeveryday.com/wp-content/uploads/2021/07/group-1.png" alt="" className="w-auto h-[20px] pr-2"/>
+                                ({cart.length})
+                            </div>
+                        </NavLink>
                         <p className="font-thin text-gray-400">| </p>
                         
                         <div className="flex mx-3 items-center">
@@ -21,38 +35,40 @@ export default function NavBar(params) {
                         </div>
                         <p className="font-thin text-gray-400">| </p>
                         
-                        <div className="flex ml-3 items-center">
-                            <img src="https://www.kahfeveryday.com/wp-content/uploads/2021/07/profile-1.png" alt="" className="w-auto h-[20px] pl-2 pr-2"/> 
-                            LOGIN 
-                        </div>
+                        <NavLink exact to="/my-account" >
+                            <div className="flex ml-3 items-center">
+                                <img src="https://www.kahfeveryday.com/wp-content/uploads/2021/07/profile-1.png" alt="" className="w-auto h-[20px] pl-2 pr-2"/> 
+                                LOGIN 
+                            </div>
+                        </NavLink>
                     </div>
                 </div>
             </div>
             <div className="px-3 pt-5 grid grid-flow-col grid-cols-3 gap-4">
                 <div>
                     <div className="pt-2 pl-8 flex items-center focus:outline-none">
-                        <a  href="/" className="">
+                        <NavLink exact to="/" >
                             <img className="h-8" src="https://www.kahfeveryday.com/wp-content/uploads/2020/07/logo_kahf-1.png"  alt="logo"/>
-                        </a>
+                        </NavLink>
                     </div>
                 </div>
                 <div className="">
                     <div className="pt-5 pb-9">
                         <nav className="uppercase tracking-wider flex justify-around items-center text-xs text-[#707070] font-bold px-3">
-                            <div>
-                                home
+                            <div className="hover:text-gray-800">
+                                <NavLink exact to="/" activeStyle={{fontWeight: "bold", color: "black"}}> home </NavLink>
                             </div>
-                            <div>
-                                shop
+                            <div className="hover:text-gray-800">
+                                <NavLink exact to="/kahf-shop" activeStyle={{fontWeight: "bold", color: "black"}}> shop </NavLink>
                             </div>
-                            <div>
-                                brand
+                            <div className="hover:text-gray-800">
+                                <NavLink exact to="/brand" activeStyle={{fontWeight: "bold", color: "black"}}> brand </NavLink>
                             </div>
-                            <div>
-                                kahfs program
+                            <div className="hover:text-gray-800">
+                                <NavLink exact to="/kahf-program" activeStyle={{fontWeight: "bold", color: "black"}}> kahf proram </NavLink>
                             </div>
-                            <div>
-                                discovery
+                            <div className="hover:text-gray-800">
+                                <NavLink exact to="/discovery" activeStyle={{fontWeight: "bold", color: "black"}}> discovery </NavLink>
                             </div>
                         </nav>
                     </div>
