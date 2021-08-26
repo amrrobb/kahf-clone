@@ -31,7 +31,7 @@ export default function NavBar(params) {
                 position: "top-center",
                 style: {
                     width: "20rem",
-                    marginTop: '3rem',
+                    marginTop: '2.5rem',
                     background: 'black',
                     color: 'white',
                     padding: '0.25rem'
