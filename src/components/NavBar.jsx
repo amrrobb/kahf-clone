@@ -11,7 +11,7 @@ export default function NavBar(params) {
 
     useEffect(() => {
         dispatch(fetchCart())
-    }, [])
+    })
 
     useEffect(() => {
         if (localStorage.getItem('account')) {
@@ -19,7 +19,7 @@ export default function NavBar(params) {
         } else {
             dispatch(loginStatus(false))
         }
-    }, [])
+    })
 
     return (
         <>

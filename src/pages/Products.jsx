@@ -9,7 +9,7 @@ export default function Products(params) {
 
     useEffect(() => {
         dispatch(fetchProducts())
-    }, [])
+    })
 
 
     return (
