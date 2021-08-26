@@ -2,7 +2,6 @@ import kahf_register from '../assets/kahf_register.jpg'
 import {VisibilityOutlined } from '@material-ui/icons'
 import { useState } from 'react'
 import {useForm} from 'react-hook-form'
-// import { Toaster } from 'react-hot-toast';
 import { useDispatch } from 'react-redux';
 import { registerUser } from '../store/actions';
 

@@ -1,7 +1,7 @@
 import Loading from './Loading'
 import {addToCart} from '../store/actions'
 import { useDispatch, useSelector } from 'react-redux'
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 import { useHistory } from 'react-router-dom';
 import { useState } from 'react';
 
@@ -31,19 +31,6 @@ export default function ProductCard({product}) {
 
     return (
         <>
-        {/* <Toaster 
-            id="product-toast"
-            toastOptions={{
-            duration: 2000,
-            position: "bottom-center",
-            style: {
-                width: "20rem",
-                marginBottom: '5rem',
-                background: 'black',
-                color: 'white',
-                padding: '0.25rem'
-            }
-        }} /> */}
         {
             product.id
             ?
