@@ -1,8 +1,11 @@
 import {
     SET_PRODUCTS,
-    SET_CART
+    SET_CART,
+    SET_REGISTER_USER,
+    SET_LOGIN_USER
 } from './actionTypes'
 import axios from 'axios'
+import toast from 'react-hot-toast'
 
 export const setProducts = (input) => {
     return {
@@ -76,4 +79,63 @@ export const deleteFromCart = (input) => {
     }
 }
 
+export const registerUser = (input) => {
+    return (dispatch, getState) => {
+        const {users: data} = {...getState()}
+        const found = data.find(({email}) => email === input.email)
+        if (found) {
+            toast('This email is already in use')
+            return false
+        } else {
+            const newInput = {
+                ...input,
+                id: data[data.length-1].id+1
+            }
+
+            dispatch(setRegisterUser(newInput))
+            toast('Register account success')
+            return true
+        }
+    }
+}
+
+export const setRegisterUser = (input) => {
+    return {
+        type: SET_REGISTER_USER,
+        payload: input
+    }
+}
+
+export const loginUser = (input) => {
+    return (dispatch, getState) => {
+        const {users: data} = {...getState()}
+        const found = data.find(({email, password}) => email === input.email && password === input.password)
+        if (found) {
+            toast('Login account success')
+            localStorage.account = input.email
+            dispatch(loginStatus(true))
+            return true
+        } else {
+            toast('Invalid email/password')
+            return false
+        }
+    }
+}
+
+export const logoutUser = () => {
+    return (dispatch, getState) => {
+        localStorage.clear()
+        toast('Logout account success', {
+            id: 'logout-toast'
+        })
+        dispatch(loginStatus(false))
+    }
+}
+
+export const loginStatus = (input) => {
+    return {
+        type: SET_LOGIN_USER,
+        payload: input
+    }
+}
 

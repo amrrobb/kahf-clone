@@ -1,13 +1,39 @@
 import kahf_login from '../assets/kahf_login.jpg'
 import {VisibilityOutlined } from '@material-ui/icons'
 import { useState } from 'react'
+import { useDispatch } from 'react-redux';
+import { loginUser } from '../store/actions';
+import { useHistory } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 
 export default function LoginBox({setLoginPage}) {
-    const [visible, setVisible] = useState(false)    
+    const [visible, setVisible] = useState(false)   
+    const dispatch = useDispatch()
+    const history = useHistory()
+    const { register, handleSubmit } = useForm({
+        email: '',
+        password: ''
+    });
+    
     const passwordVisibility = (e) => {
         e.preventDefault()
         return visible ? setVisible(false) : setVisible(true)
     }
+
+    const loginSubmit = async (data) => {
+        try {
+            const res = await dispatch(loginUser(data))
+            if (res) {
+                setTimeout(() => {
+                    history.push('/')
+                }, 3000)
+            }
+
+        }
+        catch (err) {
+            console.log(err);
+        }
+    } 
 
     return (
         <>
@@ -22,18 +48,18 @@ export default function LoginBox({setLoginPage}) {
                             welcome back and sign in your account
                         </div>
                         <div className="pt-6 px-4">
-                            <form className="text-sm">
+                            <form className="text-sm" onSubmit={handleSubmit(loginSubmit)}>
                                 <div className="mb-6">
                                     <label className="font-semibold mb-1">Email</label>
                                     <div>
-                                        <input type="text" className="border focus:outline-none focus:bg-gray-100 border-gray-200 w-full py-3 px-4" placeholder="Your Email Address" />
+                                        <input type="email" className="border focus:outline-none focus:bg-gray-100 border-gray-200 w-full py-3 px-4" placeholder="Your Email Address" name="email" {...register('email') }/>
                                     </div>
                                 </div>
 
                                 <div className="mb-6">
                                     <label className="font-semibold mb-1">Password</label>
                                     <div className="w-full flex items-center border p-[0] m-[0]">
-                                        <input type={visible ? "text" : "password"} className="focus:outline-none focus:bg-gray-100 border-gray-200 w-3/4 py-3 px-4" placeholder="Your Password"  />
+                                        <input type={visible ? "text" : "password"} className="focus:outline-none focus:bg-gray-100 border-gray-200 w-3/4 py-3 px-4" placeholder="Your Password" name="password" {...register('password') } />
                                         <div className="text-right w-1/4">
                                             <button type="button" onClick={passwordVisibility}>
                                                 <VisibilityOutlined className="mr-4"/>

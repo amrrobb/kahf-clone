@@ -8,7 +8,7 @@ export default function Cart(params) {
 
     return (
         <>
-        <div className="grid grid-flow-col grid-cols-2 gap-4">
+        <div className="grid grid-flow-col grid-cols-2 gap-4 mb-[10%]">
             <div className="w-[75%] ml-[14rem]">
                 <div className="mb-[3.5rem]">
                     <p className="text-2xl text-gray-500 font-semibold tracking-wider">SHOPPING CART</p>

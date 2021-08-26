@@ -19,7 +19,9 @@ export default function ProductCard({product}) {
             image: product.image
         }
         dispatch(addToCart(input))
-        toast('Product successfuly added')
+        toast('Product successfuly added', {
+            id: 'product-toast'
+        })
     }
 
     const checkItemFromCart = (name) => {
@@ -29,7 +31,9 @@ export default function ProductCard({product}) {
 
     return (
         <>
-        <Toaster toastOptions={{
+        {/* <Toaster 
+            id="product-toast"
+            toastOptions={{
             duration: 2000,
             position: "bottom-center",
             style: {
@@ -39,7 +43,7 @@ export default function ProductCard({product}) {
                 color: 'white',
                 padding: '0.25rem'
             }
-        }} />
+        }} /> */}
         {
             product.id
             ?

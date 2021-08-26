@@ -1,18 +1,43 @@
 import { useEffect } from "react"
+import { Toaster } from "react-hot-toast"
 import { useDispatch, useSelector } from "react-redux"
 import { NavLink } from "react-router-dom"
-import {fetchCart} from '../store/actions'
+import {fetchCart, logoutUser, loginStatus} from '../store/actions'
 
 export default function NavBar(params) {
     const cart = useSelector(state => state.cart)
+    const isLoggedIn = useSelector(state => state.isLoggedIn)
     const dispatch = useDispatch()
 
     useEffect(() => {
         dispatch(fetchCart())
     }, [])
 
+    useEffect(() => {
+        if (localStorage.getItem('account')) {
+            dispatch(loginStatus(true))
+        } else {
+            dispatch(loginStatus(false))
+        }
+    }, [])
+
     return (
         <>
+        <div>
+        <Toaster 
+                id="logout-toast"
+                toastOptions={{
+                duration: 3000,
+                position: "top-center",
+                style: {
+                    width: "20rem",
+                    marginTop: '3rem',
+                    background: 'black',
+                    color: 'white',
+                    padding: '0.25rem'
+                }
+            }} />
+        </div>
         <div className="fixed w-full m-0 top-0 bg-white z-30"> 
             <div className="px-2 py-2.5 grid grid-flow-col grid-cols-3 gap-4 bg-[#3C4536]">
                 <div></div>
@@ -20,7 +45,7 @@ export default function NavBar(params) {
                     <p className="text-white text-sm">NEW: Kahf Gentle Exfoliating Face Scrub</p>
                 </div>
                 <div className="text-right text-white text-sm">
-                    <div className="flex justify-end ">
+                    <div className="flex justify-end mr-3">
                         <NavLink exact to="/cart" >
                             <div className="flex mx-3 items-center">
                                 <img src="https://www.kahfeveryday.com/wp-content/uploads/2021/07/group-1.png" alt="" className="w-auto h-[20px] pr-2"/>
@@ -34,13 +59,26 @@ export default function NavBar(params) {
                             (0)  
                         </div>
                         <p className="font-thin text-gray-400">| </p>
-                        
-                        <NavLink exact to="/my-account" >
+                         
+                        {
+                            !isLoggedIn
+                            ?
+                            <NavLink exact to="/my-account" >
+                                <div className="flex ml-3 items-center">
+                                    <img src="https://www.kahfeveryday.com/wp-content/uploads/2021/07/profile-1.png" alt="" className="w-auto h-[20px] pl-2 pr-2"/> 
+                                    LOGIN 
+                                </div>
+                            </NavLink>
+                            :
                             <div className="flex ml-3 items-center">
                                 <img src="https://www.kahfeveryday.com/wp-content/uploads/2021/07/profile-1.png" alt="" className="w-auto h-[20px] pl-2 pr-2"/> 
-                                LOGIN 
+                                <button type="button" onClick={() => dispatch(logoutUser())}>
+                                    LOGOUT 
+                                </button>
                             </div>
-                        </NavLink>
+
+                        }
+                        
                     </div>
                 </div>
             </div>
